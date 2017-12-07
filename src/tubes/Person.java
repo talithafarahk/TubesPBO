@@ -13,25 +13,25 @@ public abstract class Person {
     private String nama;
     private String jeniskelamin;
     private int umur;
-    private String id;
     private String username;
-    private String passwoard;
+    private String password;
 
-    public Person(String nama, String jeniskelamin, int umur, String id, String username, String passwoard) {
+    public Person(String nama, String jeniskelamin, int umur, String username, String password) {
         this.nama = nama;
         this.jeniskelamin = jeniskelamin;
         this.umur = umur;
-        this.id = id;
         this.username = username;
-        this.passwoard = passwoard;
+        this.password = password;
     }
-
+    public Person(){
+        
+    }
     public String getUsername() {
         return username;
     }
 
     public String getPasswoard() {
-        return passwoard;
+        return password;
     }
 
     public abstract String getId();
