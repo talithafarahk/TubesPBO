@@ -89,14 +89,14 @@ public class Mahasiswa extends Person{
             ArrayList<Mahasiswa> listMahasiswa = new ArrayList<>();
             Database DB= new Database();
             String q = "select NIM, jurusan, fakultas, sks, nama, jeniskelamin, umur, username, password, tanggalLahir from Mahasiswa";
-            stmt =DB.konekDatabase();
+            DB.konekDatabase();
             ResultSet rs2 = stmt.executeQuery(q);
             while(rs2.next()){
                 Mahasiswa m = new Mahasiswa (rs2.getString("NIM"),rs2.getString("jurusan"),rs2.getString("fakultas"),rs2.getInt("sks"), rs2.getString("nama"), rs2.getString("jeniskelamin")
                         , rs2.getInt("umur"), rs2.getString("username"), rs2.getString("password"), rs2.getDate("tanggalLahir"), rs2.getString("alamat"), rs2.getString("email"), rs2.getString("NoHp"));
                 listMahasiswa.add(m);
             }
-            c.close();
+            DB.disconect();
             return listMahasiswa;
             
         } catch (SQLException ex){
@@ -129,26 +129,20 @@ public class Mahasiswa extends Person{
     }
     
     public void updateMahasiswa (Mahasiswa m) {
-        try {
-            Database db = new Database();
-            db.konekDatabase();
-            
-            String query = "UPDATE Mahasiswa set nama='" + m.getNama() + "',tanggalLahir='"+ m.getTanggalLahir()
-                    +"', alamat = '" + m.getAlamat() + "' , noHP  = '" + m.getNoHp() + "' "
-                    + "WHERE NIM = " + "'" + m.getNim() + "'";
-            
-            ResultSet rs = db.executeInsert(query);
-            c.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        Database db = new Database();
+        db.konekDatabase();
+        String query = "UPDATE Mahasiswa set nama='" + m.getNama() + "',tanggalLahir='"+ m.getTanggalLahir()
+                +"', alamat = '" + m.getAlamat() + "' , noHP  = '" + m.getNoHp() + "' "
+                + "WHERE NIM = " + "'" + m.getNim() + "'";
+        ResultSet rs = db.executeInsert(query);
+        db.disconect();
     }
     public boolean login(String username, String password){
          try{
             Mahasiswa m = null;
             Database DB= new Database();
             DB.konekDatabase();
-            String q = "select username, password, NIM from Mahasiswa where (username = '"+username+"' AND password = "+password+"')" ;
+            String q = "select username, password, NIM from Mahasiswa where (username = '"+username+"' AND password = '"+password+"')" ;
             ResultSet rs2 = DB.executeGet(q);
             while(rs2.next()){
                 System.out.println("a");

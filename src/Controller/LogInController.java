@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import tubes.Mahasiswa;
 import view.Login;
+import view.Login_gui;
 
 /**
  *
@@ -18,7 +19,7 @@ import view.Login;
 public class LogInController implements ActionListener {
     
     Mahasiswa m = new Mahasiswa();
-    Login l = new Login();
+    Login_gui l = new Login_gui();
 
     public LogInController() {
         l.setVisible(true);
@@ -28,7 +29,7 @@ public class LogInController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    if (e.getSource().equals(l.getLogIn())){
+    if (e.getSource().equals(l.getBtnLogin())){
         System.out.println("login");
         if (m.login(l.getUsernameField(), l.getPasswordField())){
             l.setVisible(false);

@@ -42,7 +42,12 @@ public class AwalController implements ActionListener {
         else if (e.getSource().equals(a.getJbLogOut())){
             a.setVisible(false);
             a.dispose();
-            AwalController awal = new AwalController();
+            LogInController login = new LogInController();
+        }
+        else if (e.getSource().equals(a.getjView())){
+            a.setVisible(false);
+            a.dispose();
+            ViewProfil view = new ViewProfil();
         }
     }
     
